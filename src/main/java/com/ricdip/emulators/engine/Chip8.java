@@ -122,7 +122,7 @@ public class Chip8 {
      */
     public void loadRom(Rom rom) {
         if (rom.getRomSize() > MEMORY_LENGTH - PC_INIT_VALUE) {
-            throw new Chip8Exception("ROM file length exceeds memory length");
+            throw new Chip8Exception("ROM file size exceeds available memory");
         }
 
         byte[] romContent = rom.getRomContent();
@@ -152,5 +152,23 @@ public class Chip8 {
         for (int i = 0; i < FontSet.SPRITES.length; i++) {
             memory[i] = FontSet.SPRITES[i];
         }
+    }
+
+    /**
+     * emulate 1 CHIP-8 cycle: fetch opcode, decode opcode, execute opcode.
+     * At the end, update sound timer and delay timer.
+     */
+    public void emulateCycle() {
+        // fetch opcode first byte
+        int opcodeFirstByte = memory[PC];
+        // fetch opcode second byte
+        int opcodeSecondByte = memory[PC + 1];
+        // merge both bytes to get full opcode:
+        // 1. 0x0000XXXX << 8 = 0xXXXX0000
+        // 2. 0xXXXX0000 | 0x0000YYYY = 0xXXXXYYYY
+        opcode = opcodeFirstByte << 8 | opcodeSecondByte;
+
+        // TODO: decode opcode
+        throw new UnsupportedOperationException("decode opcode not implemented");
     }
 }
