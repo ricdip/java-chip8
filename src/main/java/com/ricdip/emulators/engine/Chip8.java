@@ -1,7 +1,11 @@
-package com.ricdip.emulators.model;
+package com.ricdip.emulators.engine;
 
 import com.ricdip.emulators.exception.Chip8Exception;
+import com.ricdip.emulators.model.FontSet;
+import com.ricdip.emulators.model.Rom;
+import lombok.Getter;
 
+@Getter
 public class Chip8 {
     /**
      * 4,096 bytes of RAM: 0x000 (0) - 0xFFF (4095).
@@ -9,21 +13,21 @@ public class Chip8 {
      * programs. Most Chip-8 programs start at location 0x200 (512).
      */
     private int[] memory;
-    private static final int MEMORY_LENGTH = 4096;
+    public static final int MEMORY_LENGTH = 4096;
 
     /**
      * 16 general purpose 8-bit registers: V0 - VF.
      * VF register should not be used by any program, as it is used as a flag.
      */
     private int[] V;
-    private static final int V_LENGTH = 16;
+    public static final int V_LENGTH = 16;
 
     /**
      * 16-bit register: index register, used to store memory addresses, so only the lowest (rightmost) 12 bits are
      * usually used (2^12 = 4096).
      */
     private int I;
-    private static final int I_INIT_VALUE = 0x000000;
+    public static final int I_INIT_VALUE = 0x000000;
 
     /**
      * special purpose 8-bit register. The delay timer is active whenever the delay timer register (DT) is non-zero.
@@ -31,7 +35,7 @@ public class Chip8 {
      * When DT reaches 0, it deactivates.
      */
     private int delayTimer;
-    private static final int DELAY_TIMER_INIT_VALUE = 0x0000;
+    public static final int DELAY_TIMER_INIT_VALUE = 0x0000;
 
     /**
      * special purpose 8-bit register. The sound timer is active whenever the sound timer register (ST) is non-zero.
@@ -40,27 +44,27 @@ public class Chip8 {
      * When ST reaches zero, the sound timer deactivates.
      */
     private int soundTimer;
-    private static final int SOUND_TIMER_INIT_VALUE = 0x0000;
+    public static final int SOUND_TIMER_INIT_VALUE = 0x0000;
 
     /**
      * 16-bit pseudo-register: program counter, used to store the currently executing address.
      * Starts at 0x200.
      */
     private int PC;
-    private static final int PC_INIT_VALUE = 0x00000200;
+    public static final int PC_INIT_VALUE = 0x00000200;
 
     /**
      * array of 16 16-bit values: used to store the address that the interpreter shoud return to when finished with a
      * subroutine. Chip-8 allows for up to 16 levels of nested subroutines.
      */
     private int[] stack;
-    private static final int STACK_LENGTH = 16;
+    public static final int STACK_LENGTH = 16;
 
     /**
      * 8-bit pseudo-register: stack pointer, used to point to the topmost level of the stack.
      */
     private int SP;
-    private static final int SP_INIT_VALUE = 0x0000;
+    public static final int SP_INIT_VALUE = 0x0000;
 
     /**
      * 16-key hexadecimal keypad with the following layout:
@@ -70,7 +74,7 @@ public class Chip8 {
      * |A|0|B|F|
      */
     private boolean[] keyboard;
-    private static final int KEYBOARD_LENGTH = 16;
+    public static final int KEYBOARD_LENGTH = 16;
 
     /**
      * the original implementation of the Chip-8 language used a 64x32-pixel monochrome display with this format:
@@ -84,9 +88,20 @@ public class Chip8 {
      * The data should be stored in the interpreter area of Chip-8 memory (0x000 to 0x1FF). This data is called
      * "fontset".
      */
-    private int[] display;
-    private static final int DISPLAY_WIDTH = 64;
-    private static final int DISPLAY_HEIGHT = 32;
+    private boolean[] display;
+    public static final int DISPLAY_WIDTH = 64;
+    public static final int DISPLAY_HEIGHT = 32;
+
+    /**
+     * 16-bit opcode. CHIP-8 has 35 opcodes which are all two bytes long.
+     */
+    private int opcode;
+    public static final int OPCODE_INIT_VALUE = 0x00000000;
+
+    /**
+     * if this flag is set, update the screen.
+     */
+    private boolean drawFlag;
 
     public Chip8() {
         init();
@@ -126,7 +141,9 @@ public class Chip8 {
         SP = SP_INIT_VALUE; // reset stack pointer
         stack = new int[STACK_LENGTH]; // clear stack
         keyboard = new boolean[KEYBOARD_LENGTH]; // reset keyboard
-        display = new int[DISPLAY_WIDTH * DISPLAY_HEIGHT]; // clear display
+        display = new boolean[DISPLAY_WIDTH * DISPLAY_HEIGHT]; // clear display
+        opcode = OPCODE_INIT_VALUE; // reset opcode
+        drawFlag = false; // reset draw flag
         loadFontSet();
     }
 
