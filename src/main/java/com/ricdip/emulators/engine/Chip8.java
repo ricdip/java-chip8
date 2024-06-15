@@ -161,9 +161,9 @@ public class Chip8 {
      */
     public void emulateCycle() {
         // fetch opcode from memory
-        opcode = OpcodeFetcher.fetch(memory, PC);
+        opcode = Chip8OpcodeFetcher.fetch(memory, PC);
 
-        Instruction decodedInstruction = OpcodeDecoder.decode(opcode);
+        Instruction decodedInstruction = Chip8OpcodeDecoder.decode(opcode);
 
         // TODO: execute opcode
         throw new UnsupportedOperationException("execute opcode not implemented");

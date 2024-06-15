@@ -1,8 +1,8 @@
 package com.ricdip.emulators.engine;
 
-final class OpcodeFetcher {
+final class Chip8OpcodeFetcher {
 
-    private OpcodeFetcher() {
+    private Chip8OpcodeFetcher() {
     }
 
     public static int fetch(int[] memory, int PC) {
@@ -11,8 +11,8 @@ final class OpcodeFetcher {
         // fetch opcode second byte
         int opcodeSecondByte = memory[PC + 1];
         // merge both bytes to get full opcode:
-        // 1. 0x0000XXXX << 8 = 0xXXXX0000
-        // 2. 0xXXXX0000 | 0x0000YYYY = 0xXXXXYYYY
+        // 1. 0x00XX << 8 = 0xXX00
+        // 2. 0xXX00 | 0x00YY = 0xXXYY
         return opcodeFirstByte << 8 | opcodeSecondByte;
     }
 }

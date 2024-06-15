@@ -3,6 +3,7 @@ package com.ricdip.emulators.model;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
+import lombok.Setter;
 
 @Getter
 @AllArgsConstructor
@@ -14,5 +15,6 @@ public class Instruction {
     private int N;
     private int NNN;
     private int KK;
+    @Setter
     private OpcodeType opcodeType;
 }
