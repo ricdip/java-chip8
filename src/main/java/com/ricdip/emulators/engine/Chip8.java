@@ -2,6 +2,7 @@ package com.ricdip.emulators.engine;
 
 import com.ricdip.emulators.exception.Chip8Exception;
 import com.ricdip.emulators.model.FontSet;
+import com.ricdip.emulators.model.Instruction;
 import com.ricdip.emulators.model.Rom;
 import lombok.Getter;
 
@@ -27,7 +28,7 @@ public class Chip8 {
      * usually used (2^12 = 4096).
      */
     private int I;
-    public static final int I_INIT_VALUE = 0x000000;
+    public static final int I_INIT_VALUE = 0x000;
 
     /**
      * special purpose 8-bit register. The delay timer is active whenever the delay timer register (DT) is non-zero.
@@ -35,7 +36,7 @@ public class Chip8 {
      * When DT reaches 0, it deactivates.
      */
     private int delayTimer;
-    public static final int DELAY_TIMER_INIT_VALUE = 0x0000;
+    public static final int DELAY_TIMER_INIT_VALUE = 0x00;
 
     /**
      * special purpose 8-bit register. The sound timer is active whenever the sound timer register (ST) is non-zero.
@@ -44,14 +45,14 @@ public class Chip8 {
      * When ST reaches zero, the sound timer deactivates.
      */
     private int soundTimer;
-    public static final int SOUND_TIMER_INIT_VALUE = 0x0000;
+    public static final int SOUND_TIMER_INIT_VALUE = 0x00;
 
     /**
      * 16-bit pseudo-register: program counter, used to store the currently executing address.
      * Starts at 0x200.
      */
     private int PC;
-    public static final int PC_INIT_VALUE = 0x00000200;
+    public static final int PC_INIT_VALUE = 0x0200;
 
     /**
      * array of 16 16-bit values: used to store the address that the interpreter shoud return to when finished with a
@@ -64,7 +65,7 @@ public class Chip8 {
      * 8-bit pseudo-register: stack pointer, used to point to the topmost level of the stack.
      */
     private int SP;
-    public static final int SP_INIT_VALUE = 0x0000;
+    public static final int SP_INIT_VALUE = 0x00;
 
     /**
      * 16-key hexadecimal keypad with the following layout:
@@ -96,7 +97,7 @@ public class Chip8 {
      * 16-bit opcode. CHIP-8 has 35 opcodes which are all two bytes long.
      */
     private int opcode;
-    public static final int OPCODE_INIT_VALUE = 0x00000000;
+    public static final int OPCODE_INIT_VALUE = 0x0000;
 
     /**
      * if this flag is set, update the screen.
@@ -127,7 +128,7 @@ public class Chip8 {
 
         byte[] romContent = rom.getRomContent();
         for (int i = 0; i < rom.getRomSize(); i++) {
-            memory[i + PC_INIT_VALUE] = romContent[i];
+            memory[i + PC_INIT_VALUE] = Byte.toUnsignedInt(romContent[i]);
         }
     }
 
@@ -159,16 +160,12 @@ public class Chip8 {
      * At the end, update sound timer and delay timer.
      */
     public void emulateCycle() {
-        // fetch opcode first byte
-        int opcodeFirstByte = memory[PC];
-        // fetch opcode second byte
-        int opcodeSecondByte = memory[PC + 1];
-        // merge both bytes to get full opcode:
-        // 1. 0x0000XXXX << 8 = 0xXXXX0000
-        // 2. 0xXXXX0000 | 0x0000YYYY = 0xXXXXYYYY
-        opcode = opcodeFirstByte << 8 | opcodeSecondByte;
+        // fetch opcode from memory
+        opcode = OpcodeFetcher.fetch(memory, PC);
 
-        // TODO: decode opcode
-        throw new UnsupportedOperationException("decode opcode not implemented");
+        Instruction decodedInstruction = OpcodeDecoder.decode(opcode);
+
+        // TODO: execute opcode
+        throw new UnsupportedOperationException("execute opcode not implemented");
     }
 }
