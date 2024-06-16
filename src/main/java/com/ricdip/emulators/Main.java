@@ -24,6 +24,7 @@ public class Main {
 
             // if draw flag is set, redraw screen
             if (chip8.isDrawFlag()) {
+                chip8.setDrawFlag(false);
                 graphics.draw(chip8.getDisplay());
             }
 

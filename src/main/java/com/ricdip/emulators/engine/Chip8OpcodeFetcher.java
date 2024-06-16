@@ -1,6 +1,6 @@
 package com.ricdip.emulators.engine;
 
-final class Chip8OpcodeFetcher {
+public final class Chip8OpcodeFetcher {
 
     private Chip8OpcodeFetcher() {
     }

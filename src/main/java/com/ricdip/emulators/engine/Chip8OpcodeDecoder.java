@@ -4,7 +4,7 @@ import com.ricdip.emulators.exception.Chip8Exception;
 import com.ricdip.emulators.model.Instruction;
 import com.ricdip.emulators.model.OpcodeType;
 
-final class Chip8OpcodeDecoder {
+public final class Chip8OpcodeDecoder {
     private Chip8OpcodeDecoder() {
     }
 
@@ -87,17 +87,17 @@ final class Chip8OpcodeDecoder {
     private static OpcodeType decodeOp0x0(Instruction instruction) {
         if (instruction.getX() == 0x0) {
             if (instruction.getY() == 0xE) {
-                switch (instruction.getN()) {
-                    case 0x0:
-                        return OpcodeType.OP_00E0;
-                    case 0xE:
-                        return OpcodeType.OP_00EE;
-                }
+                return switch (instruction.getN()) {
+                    case 0x0 -> OpcodeType.OP_00E0;
+                    case 0xE -> OpcodeType.OP_00EE;
+                    default -> null;
+                };
+            } else {
+                return null;
             }
         } else {
             return OpcodeType.OP_0NNN;
         }
-        return null;
     }
 
     private static OpcodeType decodeOp0x1() {
@@ -119,8 +119,9 @@ final class Chip8OpcodeDecoder {
     private static OpcodeType decodeOp0x5(Instruction instruction) {
         if (instruction.getN() == 0x0) {
             return OpcodeType.OP_5XY0;
+        } else {
+            return null;
         }
-        return null;
     }
 
     private static OpcodeType decodeOp0x6() {
@@ -132,34 +133,26 @@ final class Chip8OpcodeDecoder {
     }
 
     private static OpcodeType decodeOp0x8(Instruction instruction) {
-        switch (instruction.getN()) {
-            case 0x0:
-                return OpcodeType.OP_8XY0;
-            case 0x1:
-                return OpcodeType.OP_8XY1;
-            case 0x2:
-                return OpcodeType.OP_8XY2;
-            case 0x3:
-                return OpcodeType.OP_8XY3;
-            case 0x4:
-                return OpcodeType.OP_8XY4;
-            case 0x5:
-                return OpcodeType.OP_8XY5;
-            case 0x6:
-                return OpcodeType.OP_8XY6;
-            case 0x7:
-                return OpcodeType.OP_8XY7;
-            case 0xE:
-                return OpcodeType.OP_8XYE;
-        }
-        return null;
+        return switch (instruction.getN()) {
+            case 0x0 -> OpcodeType.OP_8XY0;
+            case 0x1 -> OpcodeType.OP_8XY1;
+            case 0x2 -> OpcodeType.OP_8XY2;
+            case 0x3 -> OpcodeType.OP_8XY3;
+            case 0x4 -> OpcodeType.OP_8XY4;
+            case 0x5 -> OpcodeType.OP_8XY5;
+            case 0x6 -> OpcodeType.OP_8XY6;
+            case 0x7 -> OpcodeType.OP_8XY7;
+            case 0xE -> OpcodeType.OP_8XYE;
+            default -> null;
+        };
     }
 
     private static OpcodeType decodeOp0x9(Instruction instruction) {
         if (instruction.getN() == 0x0) {
             return OpcodeType.OP_9XY0;
+        } else {
+            return null;
         }
-        return null;
     }
 
     private static OpcodeType decodeOp0xA() {
@@ -179,36 +172,25 @@ final class Chip8OpcodeDecoder {
     }
 
     private static OpcodeType decodeOp0xE(Instruction instruction) {
-        switch (instruction.getKK()) {
-            case 0x9E:
-                return OpcodeType.OP_EX9E;
-            case 0xA1:
-                return OpcodeType.OP_EXA1;
-        }
-        return null;
+        return switch (instruction.getKK()) {
+            case 0x9E -> OpcodeType.OP_EX9E;
+            case 0xA1 -> OpcodeType.OP_EXA1;
+            default -> null;
+        };
     }
 
     private static OpcodeType decodeOp0xF(Instruction instruction) {
-        switch (instruction.getKK()) {
-            case 0x07:
-                return OpcodeType.OP_FX07;
-            case 0x0A:
-                return OpcodeType.OP_FX0A;
-            case 0x15:
-                return OpcodeType.OP_FX15;
-            case 0x18:
-                return OpcodeType.OP_FX18;
-            case 0x1E:
-                return OpcodeType.OP_FX1E;
-            case 0x29:
-                return OpcodeType.OP_FX29;
-            case 0x33:
-                return OpcodeType.OP_FX33;
-            case 0x55:
-                return OpcodeType.OP_FX55;
-            case 0x65:
-                return OpcodeType.OP_FX65;
-        }
-        return null;
+        return switch (instruction.getKK()) {
+            case 0x07 -> OpcodeType.OP_FX07;
+            case 0x0A -> OpcodeType.OP_FX0A;
+            case 0x15 -> OpcodeType.OP_FX15;
+            case 0x18 -> OpcodeType.OP_FX18;
+            case 0x1E -> OpcodeType.OP_FX1E;
+            case 0x29 -> OpcodeType.OP_FX29;
+            case 0x33 -> OpcodeType.OP_FX33;
+            case 0x55 -> OpcodeType.OP_FX55;
+            case 0x65 -> OpcodeType.OP_FX65;
+            default -> null;
+        };
     }
 }
