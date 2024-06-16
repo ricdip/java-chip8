@@ -4,8 +4,19 @@ import com.ricdip.emulators.exception.Chip8Exception;
 import com.ricdip.emulators.model.Instruction;
 
 import java.util.Arrays;
+import java.util.Random;
 
 public class Chip8 extends BaseChip8 {
+
+    private final Random random;
+
+    public Chip8() {
+        random = new Random();
+    }
+
+    public void setRandomSeed(long seed) {
+        random.setSeed(seed);
+    }
 
     @Override
     public void emulateCycle() {
@@ -167,7 +178,43 @@ public class Chip8 extends BaseChip8 {
                 break;
 
             case OP_BNNN:
-                // TODO: continue execute opcode implementation
+                PC = NNN + V[0x0];
+                break;
+
+            case OP_CXKK:
+                // generate random number: [0, 256)
+                int rnd = random.nextInt(0xFF + 1);
+                V[X] = rnd & KK;
+                PC += 2;
+                break;
+
+            case OP_DXYN:
+                // TODO: draw opcode
+                break;
+
+            case OP_EX9E:
+                checkIllegalKeyError(V[X]);
+                if (keyboard[V[X]]) {
+                    PC += 2;
+                }
+                PC += 2;
+                break;
+
+            case OP_EXA1:
+                checkIllegalKeyError(V[X]);
+                if (!keyboard[V[X]]) {
+                    PC += 2;
+                }
+                PC += 2;
+                break;
+
+            case OP_FX07:
+                V[X] = delayTimer;
+                PC += 2;
+                break;
+
+            case OP_FX0A:
+                // TODO: continue implementing
                 break;
 
             default:
@@ -184,6 +231,12 @@ public class Chip8 extends BaseChip8 {
     private void checkStackOverflowError() {
         if (SP == stack.length) {
             throw new Chip8Exception("Stack overflow error: attempted to add value to full stack");
+        }
+    }
+
+    private void checkIllegalKeyError(int value) {
+        if (value >= keyboard.length) {
+            throw new Chip8Exception(String.format("Illegal key error: 0x%02X", value));
         }
     }
 }
