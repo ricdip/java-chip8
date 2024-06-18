@@ -1,6 +1,7 @@
 package com.ricdip.emulators.engine;
 
 import com.ricdip.emulators.exception.Chip8Exception;
+import com.ricdip.emulators.model.FontSet;
 import com.ricdip.emulators.model.Instruction;
 
 import java.util.Arrays;
@@ -214,7 +215,53 @@ public class Chip8 extends BaseChip8 {
                 break;
 
             case OP_FX0A:
-                // TODO: continue implementing
+                // TODO: All execution stops until a key is pressed, then the value of that key is stored in Vx
+                break;
+
+            case OP_FX15:
+                delayTimer = V[X];
+                PC += 2;
+                break;
+
+            case OP_FX18:
+                soundTimer = V[X];
+                PC += 2;
+                break;
+
+            case OP_FX1E:
+                I += V[X];
+                PC += 2;
+                break;
+
+            case OP_FX29:
+                for (int i = 0; i < FontSet.SPRITES.length; i++) {
+                    if (V[X] == memory[i]) {
+                        I = i;
+                        break;
+                    }
+                }
+                PC += 2;
+                break;
+
+            case OP_FX33:
+                memory[I] = V[X] / 100;
+                memory[I + 1] = (V[X] / 10) % 10;
+                memory[I + 2] = (V[X] % 100);
+                PC += 2;
+                break;
+
+            case OP_FX55:
+                for (int i = 0; i < V.length; i++) {
+                    memory[I + i] = V[i];
+                }
+                PC += 2;
+                break;
+
+            case OP_FX65:
+                for (int i = 0; i < V.length; i++) {
+                    V[i] = memory[I + i];
+                }
+                PC += 2;
                 break;
 
             default:
