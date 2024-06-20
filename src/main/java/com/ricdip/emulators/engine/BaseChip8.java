@@ -88,9 +88,7 @@ public abstract class BaseChip8 {
      * The data should be stored in the interpreter area of Chip-8 memory (0x000 to 0x1FF). This data is called
      * "fontset".
      */
-    protected boolean[] display;
-    public static final int DISPLAY_WIDTH = 64;
-    public static final int DISPLAY_HEIGHT = 32;
+    protected Display display;
 
     /**
      * 16-bit opcode. CHIP-8 has 35 opcodes which are all two bytes long.
@@ -106,6 +104,7 @@ public abstract class BaseChip8 {
 
     public BaseChip8() {
         keyboard = new Keyboard();
+        display = new Display();
         init();
     }
 
@@ -143,7 +142,7 @@ public abstract class BaseChip8 {
         SP = SP_INIT_VALUE; // reset stack pointer
         stack = new int[STACK_LENGTH]; // clear stack
         keyboard.reset(); // reset keyboard
-        display = new boolean[DISPLAY_WIDTH * DISPLAY_HEIGHT]; // clear display
+        display.clear(); // clear display
         opcode = OPCODE_INIT_VALUE; // reset opcode
         drawFlag = false; // reset draw flag
         loadFontSet();

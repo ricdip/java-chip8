@@ -4,7 +4,6 @@ import com.ricdip.emulators.exception.Chip8Exception;
 import com.ricdip.emulators.model.FontSet;
 import com.ricdip.emulators.model.Instruction;
 
-import java.util.Arrays;
 import java.util.Optional;
 import java.util.Random;
 
@@ -45,7 +44,7 @@ public class Chip8 extends BaseChip8 {
                 break;
 
             case OP_00E0:
-                Arrays.fill(display, false);
+                display.clear();
                 drawFlag = true;
                 PC += 2;
                 break;
