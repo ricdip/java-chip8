@@ -5,6 +5,7 @@ import com.ricdip.emulators.model.FontSet;
 import com.ricdip.emulators.model.Instruction;
 
 import java.util.Arrays;
+import java.util.Optional;
 import java.util.Random;
 
 public class Chip8 extends BaseChip8 {
@@ -194,16 +195,14 @@ public class Chip8 extends BaseChip8 {
                 break;
 
             case OP_EX9E:
-                checkIllegalKeyError(V[X]);
-                if (keyboard[V[X]]) {
+                if (keyboard.isPressed(V[X])) {
                     PC += 2;
                 }
                 PC += 2;
                 break;
 
             case OP_EXA1:
-                checkIllegalKeyError(V[X]);
-                if (!keyboard[V[X]]) {
+                if (!keyboard.isPressed(V[X])) {
                     PC += 2;
                 }
                 PC += 2;
@@ -215,7 +214,12 @@ public class Chip8 extends BaseChip8 {
                 break;
 
             case OP_FX0A:
-                // TODO: All execution stops until a key is pressed, then the value of that key is stored in Vx
+                Optional<Integer> pressedKey = keyboard.getPressedKey();
+                if (pressedKey.isEmpty()) {
+                    break;
+                }
+                V[X] = pressedKey.get();
+                PC += 2;
                 break;
 
             case OP_FX15:
@@ -278,12 +282,6 @@ public class Chip8 extends BaseChip8 {
     private void checkStackOverflowError() {
         if (SP == stack.length) {
             throw new Chip8Exception("Stack overflow error: attempted to add value to full stack");
-        }
-    }
-
-    private void checkIllegalKeyError(int value) {
-        if (value >= keyboard.length) {
-            throw new Chip8Exception(String.format("Illegal key error: 0x%02X", value));
         }
     }
 }

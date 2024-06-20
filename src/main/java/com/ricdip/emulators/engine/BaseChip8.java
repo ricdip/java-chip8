@@ -68,14 +68,13 @@ public abstract class BaseChip8 {
     public static final int SP_INIT_VALUE = 0x00;
 
     /**
-     * 16-key hexadecimal keypad with the following layout:
+     * object that contains a 16-key hexadecimal keypad with the following layout:
      * |1|2|3|C|
      * |4|5|6|D|
      * |7|8|9|E|
      * |A|0|B|F|
      */
-    protected boolean[] keyboard;
-    public static final int KEYBOARD_LENGTH = 16;
+    protected Keyboard keyboard;
 
     /**
      * the original implementation of the Chip-8 language used a 64x32-pixel monochrome display with this format:
@@ -106,6 +105,7 @@ public abstract class BaseChip8 {
     protected boolean drawFlag;
 
     public BaseChip8() {
+        keyboard = new Keyboard();
         init();
     }
 
@@ -142,7 +142,7 @@ public abstract class BaseChip8 {
         PC = PC_INIT_VALUE; // program counter starts at 0x200
         SP = SP_INIT_VALUE; // reset stack pointer
         stack = new int[STACK_LENGTH]; // clear stack
-        keyboard = new boolean[KEYBOARD_LENGTH]; // reset keyboard
+        keyboard.reset(); // reset keyboard
         display = new boolean[DISPLAY_WIDTH * DISPLAY_HEIGHT]; // clear display
         opcode = OPCODE_INIT_VALUE; // reset opcode
         drawFlag = false; // reset draw flag

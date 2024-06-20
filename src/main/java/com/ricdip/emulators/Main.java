@@ -9,7 +9,7 @@ public class Main {
     public static void main(String[] args) {
         // init graphics
         Graphics graphics = new TerminalGraphics();
-        // TODO: init input
+        // TODO: init key events
         // init engine
         Chip8 chip8 = new Chip8();
         // load ROM file
