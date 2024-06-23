@@ -190,7 +190,25 @@ public class Chip8 extends BaseChip8 {
                 break;
 
             case OP_DXYN:
-                // TODO: draw opcode
+                V[0xF] = 0;
+                for (int i = 0; i < N; i++) {
+                    int spritePixel = memory[I + i];
+                    for (int j = 0; j < 8; j++) {
+                        int currentBit = (0b10000000 >> j) & spritePixel;
+                        int coords = ((V[Y] + i) * Display.DISPLAY_WIDTH) + (V[X] + j);
+
+                        if (currentBit != 0) {
+                            if (display.getDisplay()[coords]) {
+                                V[0xF] = 1;
+                                display.getDisplay()[coords] = false;
+                            } else {
+                                display.getDisplay()[coords] = true;
+                            }
+                        }
+                    }
+                }
+                drawFlag = true;
+                PC += 2;
                 break;
 
             case OP_EX9E:
