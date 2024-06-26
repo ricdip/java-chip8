@@ -2,6 +2,6 @@ package com.ricdip.emulators.graphics;
 
 import com.ricdip.emulators.engine.Display;
 
-public interface Graphics {
-    void draw(Display display);
+public interface Screen {
+    void redraw(Display display);
 }

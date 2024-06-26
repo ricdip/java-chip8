@@ -2,10 +2,10 @@ package com.ricdip.emulators.graphics;
 
 import com.ricdip.emulators.engine.Display;
 
-public class TerminalGraphics implements Graphics {
+public class TerminalScreen implements Screen {
 
     @Override
-    public void draw(Display display) {
+    public void redraw(Display display) {
         for (int i = 0; i < display.getDisplay().length; i++) {
             if (i % Display.DISPLAY_WIDTH == 0) {
                 System.out.print("\n");
