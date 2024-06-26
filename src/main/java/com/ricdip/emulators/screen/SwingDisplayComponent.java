@@ -1,4 +1,4 @@
-package com.ricdip.emulators.graphics;
+package com.ricdip.emulators.screen;
 
 import com.ricdip.emulators.engine.Display;
 import lombok.AllArgsConstructor;

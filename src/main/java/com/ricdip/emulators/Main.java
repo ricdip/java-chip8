@@ -1,9 +1,9 @@
 package com.ricdip.emulators;
 
 import com.ricdip.emulators.engine.Chip8;
-import com.ricdip.emulators.graphics.Screen;
-import com.ricdip.emulators.graphics.SwingScreen;
 import com.ricdip.emulators.model.Rom;
+import com.ricdip.emulators.screen.Screen;
+import com.ricdip.emulators.screen.SwingScreen;
 
 public class Main {
     public static void main(String[] args) {
@@ -11,7 +11,8 @@ public class Main {
         Chip8 chip8 = new Chip8();
         // init graphics
         Screen screen = new SwingScreen(chip8.getDisplay());
-        // TODO: init key events
+        // init keyboard input
+        screen.configureKeyListener(chip8.getKeyboard());
         // load ROM file
         Rom romFile = new Rom("roms/IBM_logo.ch8");
         chip8.loadRom(romFile);
@@ -28,7 +29,7 @@ public class Main {
                 screen.redraw(chip8.getDisplay());
             }
 
-            // TODO: handle key press
+            // TODO: handle timers
         }
     }
 }
