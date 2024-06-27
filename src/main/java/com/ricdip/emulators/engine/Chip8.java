@@ -3,10 +3,12 @@ package com.ricdip.emulators.engine;
 import com.ricdip.emulators.exception.Chip8Exception;
 import com.ricdip.emulators.model.FontSet;
 import com.ricdip.emulators.model.Instruction;
+import lombok.extern.slf4j.Slf4j;
 
 import java.util.Optional;
 import java.util.Random;
 
+@Slf4j
 public class Chip8 extends BaseChip8 {
 
     private final Random random;
@@ -17,21 +19,26 @@ public class Chip8 extends BaseChip8 {
 
     public void setRandomSeed(long seed) {
         random.setSeed(seed);
+        log.info("random seed {} set", seed);
     }
 
     @Override
     public void emulateCycle() {
         // fetch opcode from memory
         opcode = Chip8OpcodeFetcher.fetch(memory, PC);
+        log.info(String.format("fetched opcode: 0x%04X", opcode));
 
         // decode opcode
         Instruction decodedInstruction = Chip8OpcodeDecoder.decode(opcode);
+        log.info("decoded instruction: {}", decodedInstruction);
 
         // execute opcode
         executeInstruction(decodedInstruction);
+        log.info("executed instruction");
 
         // update timers
         updateTimers();
+        log.info("timers updated");
     }
 
     private void executeInstruction(Instruction instruction) {

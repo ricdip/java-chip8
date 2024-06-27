@@ -8,8 +8,10 @@ import com.ricdip.emulators.sound.Sound;
 import lombok.Getter;
 import lombok.NonNull;
 import lombok.Setter;
+import lombok.extern.slf4j.Slf4j;
 
 @Getter
+@Slf4j
 public abstract class BaseChip8 {
     /**
      * Chip-8 frame rate in Hz
@@ -123,6 +125,7 @@ public abstract class BaseChip8 {
      */
     public void reset() {
         init();
+        log.info("reset performed");
     }
 
     /**
@@ -140,9 +143,11 @@ public abstract class BaseChip8 {
         for (int i = 0; i < rom.getRomSize(); i++) {
             memory[i + PC_INIT_VALUE] = Byte.toUnsignedInt(romContent[i]);
         }
+        log.info("ROM file loaded");
     }
 
     private void init() {
+        log.info("initialization");
         memory = new int[MEMORY_LENGTH]; // clear memory
         V = new int[V_LENGTH]; // clear registers V0-VF
         I = I_INIT_VALUE; // clear index register
@@ -163,6 +168,7 @@ public abstract class BaseChip8 {
         for (int i = 0; i < FontSet.SPRITES.length; i++) {
             memory[i] = FontSet.SPRITES[i];
         }
+        log.info("fontset loaded");
     }
 
     /**
@@ -173,5 +179,6 @@ public abstract class BaseChip8 {
 
     public void setSound(@NonNull Sound sound) {
         this.sound = sound;
+        log.info("sound module {} set", sound.getClass().getName());
     }
 }

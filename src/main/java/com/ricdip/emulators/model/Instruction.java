@@ -17,4 +17,9 @@ public class Instruction {
     private int KK;
     @Setter
     private OpcodeType opcodeType;
+
+    @Override
+    public String toString() {
+        return opcodeType.getType();
+    }
 }
