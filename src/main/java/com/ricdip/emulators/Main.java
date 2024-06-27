@@ -13,6 +13,7 @@ public class Main {
         Screen screen = new SwingScreen(chip8.getDisplay());
         // init keyboard input
         screen.configureKeyListener(chip8.getKeyboard());
+        // TODO: init sound effect
         // load ROM file
         Rom romFile = new Rom("roms/IBM_logo.ch8");
         chip8.loadRom(romFile);
@@ -28,8 +29,6 @@ public class Main {
                 chip8.setDrawFlag(false);
                 screen.redraw(chip8.getDisplay());
             }
-
-            // TODO: handle timers
         }
     }
 }

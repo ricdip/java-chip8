@@ -29,6 +29,9 @@ public class Chip8 extends BaseChip8 {
 
         // execute opcode
         executeInstruction(decodedInstruction);
+
+        // update timers
+        updateTimers();
     }
 
     private void executeInstruction(Instruction instruction) {
@@ -299,6 +302,17 @@ public class Chip8 extends BaseChip8 {
     private void checkStackOverflowError() {
         if (SP == stack.length) {
             throw new Chip8Exception("Stack overflow error: attempted to add value to full stack");
+        }
+    }
+
+    private void updateTimers() {
+        if (delayTimer > 0) {
+            delayTimer -= 1;
+        }
+
+        if (soundTimer > 0) {
+            sound.performSound();
+            soundTimer -= 1;
         }
     }
 }

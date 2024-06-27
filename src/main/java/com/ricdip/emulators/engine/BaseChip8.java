@@ -3,7 +3,10 @@ package com.ricdip.emulators.engine;
 import com.ricdip.emulators.exception.Chip8Exception;
 import com.ricdip.emulators.model.FontSet;
 import com.ricdip.emulators.model.Rom;
+import com.ricdip.emulators.sound.NoneSound;
+import com.ricdip.emulators.sound.Sound;
 import lombok.Getter;
+import lombok.NonNull;
 import lombok.Setter;
 
 @Getter
@@ -46,6 +49,7 @@ public abstract class BaseChip8 {
      */
     protected int soundTimer;
     public static final int SOUND_TIMER_INIT_VALUE = 0x00;
+    protected Sound sound;
 
     /**
      * 16-bit pseudo-register: program counter, used to store the currently executing address.
@@ -105,6 +109,7 @@ public abstract class BaseChip8 {
     public BaseChip8() {
         keyboard = new Keyboard();
         display = new Display();
+        sound = new NoneSound();
         init();
     }
 
@@ -160,4 +165,8 @@ public abstract class BaseChip8 {
      * At the end, update sound timer and delay timer.
      */
     public abstract void emulateCycle();
+
+    public void setSound(@NonNull Sound sound) {
+        this.sound = sound;
+    }
 }
