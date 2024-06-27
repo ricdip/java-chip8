@@ -4,6 +4,7 @@ import com.ricdip.emulators.engine.Chip8;
 import com.ricdip.emulators.model.Rom;
 import com.ricdip.emulators.screen.Screen;
 import com.ricdip.emulators.screen.SwingScreen;
+import com.ricdip.emulators.utils.Sleep;
 
 public class Main {
     public static void main(String[] args) {
@@ -29,6 +30,9 @@ public class Main {
                 chip8.setDrawFlag(false);
                 screen.redraw(chip8.getDisplay());
             }
+
+            // limit frame rate at 60 Hz
+            Sleep.fromFrequency(Chip8.FRAME_RATE);
         }
     }
 }

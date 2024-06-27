@@ -12,6 +12,11 @@ import lombok.Setter;
 @Getter
 public abstract class BaseChip8 {
     /**
+     * Chip-8 frame rate in Hz
+     */
+    public static final int FRAME_RATE = 60;
+
+    /**
      * 4,096 bytes of RAM: 0x000 (0) - 0xFFF (4095).
      * The first 512 bytes (0x000 - 0x1FF) are where the original interpreter was located, and should not be used by
      * programs. Most Chip-8 programs start at location 0x200 (512).
