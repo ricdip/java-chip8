@@ -87,17 +87,16 @@ public final class Chip8OpcodeDecoder {
     private static OpcodeType decodeOp0x0(Instruction instruction) {
         if (instruction.getX() == 0x0) {
             if (instruction.getY() == 0xE) {
-                return switch (instruction.getN()) {
-                    case 0x0 -> OpcodeType.OP_00E0;
-                    case 0xE -> OpcodeType.OP_00EE;
-                    default -> null;
-                };
-            } else {
-                return null;
+                switch (instruction.getN()) {
+                    case 0x0:
+                        return OpcodeType.OP_00E0;
+                    case 0xE:
+                        return OpcodeType.OP_00EE;
+                }
             }
-        } else {
-            return OpcodeType.OP_0NNN;
         }
+
+        return OpcodeType.OP_0NNN;
     }
 
     private static OpcodeType decodeOp0x1() {

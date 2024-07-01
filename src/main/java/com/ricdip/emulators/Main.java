@@ -4,6 +4,7 @@ import com.ricdip.emulators.engine.Chip8;
 import com.ricdip.emulators.model.Rom;
 import com.ricdip.emulators.screen.Screen;
 import com.ricdip.emulators.screen.SwingScreen;
+import com.ricdip.emulators.sound.PrintSound;
 import com.ricdip.emulators.utils.Sleep;
 
 public class Main {
@@ -15,6 +16,7 @@ public class Main {
         // init keyboard input
         screen.configureKeyListener(chip8.getKeyboard());
         // TODO: init sound effect
+        chip8.setSound(new PrintSound());
         // load ROM file
         Rom romFile = new Rom("roms/IBM_logo.ch8");
         chip8.loadRom(romFile);

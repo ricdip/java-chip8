@@ -20,6 +20,6 @@ public class Instruction {
 
     @Override
     public String toString() {
-        return opcodeType.getType();
+        return (opcodeType != null) ? opcodeType.getType() : "<null opcode type>";
     }
 }
