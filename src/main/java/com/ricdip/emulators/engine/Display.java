@@ -1,10 +1,7 @@
 package com.ricdip.emulators.engine;
 
-import lombok.Getter;
-
 import java.util.Arrays;
 
-@Getter
 public class Display {
     /**
      * the original implementation of the Chip-8 language used a 64x32-pixel monochrome display with this format:
@@ -28,5 +25,15 @@ public class Display {
 
     public void clear() {
         Arrays.fill(display, false);
+    }
+
+    public boolean isPixelSet(int row, int col) {
+        int coords = (row * Display.DISPLAY_WIDTH) + col;
+        return display[coords];
+    }
+
+    public void togglePixel(int row, int col) {
+        int coords = (row * Display.DISPLAY_WIDTH) + col;
+        display[coords] = !display[coords];
     }
 }

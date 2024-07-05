@@ -16,7 +16,7 @@ public class SwingDisplayComponent extends JComponent {
         super.paintComponent(g);
         for (int height = 0; height < Display.DISPLAY_HEIGHT; height++) {
             for (int width = 0; width < Display.DISPLAY_WIDTH; width++) {
-                if (display.getDisplay()[(height * Display.DISPLAY_WIDTH) + width]) {
+                if (display.isPixelSet(height, width)) {
                     g.setColor(Color.WHITE);
                 } else {
                     g.setColor(Color.BLACK);

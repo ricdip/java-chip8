@@ -9,9 +9,9 @@ public final class Chip8OpcodeDecoder {
     }
 
     public static Instruction decode(int opcode) {
-        int op = (opcode & 0xF000) >> 12;
-        int x = (opcode & 0x0F00) >> 8;
-        int y = (opcode & 0x00F0) >> 4;
+        int op = (opcode & 0xF000) >>> 12;
+        int x = (opcode & 0x0F00) >>> 8;
+        int y = (opcode & 0x00F0) >>> 4;
         int n = (opcode & 0x000F);
         int kk = (opcode & 0x00FF);
         int nnn = (opcode & 0x0FFF);

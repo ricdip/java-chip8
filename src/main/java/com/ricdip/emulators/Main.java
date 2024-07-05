@@ -34,7 +34,7 @@ public class Main {
             }
 
             // limit frame rate at 60 Hz
-            Sleep.fromFrequency(Chip8.FRAME_RATE);
+            Sleep.fromFrameRate(Chip8.FRAME_RATE);
         }
     }
 }

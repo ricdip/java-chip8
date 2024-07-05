@@ -179,6 +179,6 @@ public abstract class BaseChip8 {
 
     public void setSound(@NonNull Sound sound) {
         this.sound = sound;
-        log.info("sound module {} set", sound.getClass().getName());
+        log.info("sound module '{}' set", sound.getClass().getName());
     }
 }

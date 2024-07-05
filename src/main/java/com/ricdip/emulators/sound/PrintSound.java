@@ -1,8 +1,11 @@
 package com.ricdip.emulators.sound;
 
+import lombok.extern.slf4j.Slf4j;
+
+@Slf4j
 public class PrintSound implements Sound {
     @Override
     public void performSound() {
-        System.out.println("BEEP");
+        log.info("BEEP");
     }
 }

@@ -17,7 +17,10 @@ public class SwingScreen implements Screen {
 
     public SwingScreen(Display display) {
         frame = new JFrame(WINDOW_TITLE);
-        frame.setSize(Display.DISPLAY_WIDTH * SwingDisplayComponent.PIXEL_SIZE, Display.DISPLAY_HEIGHT * SwingDisplayComponent.PIXEL_SIZE);
+        frame.setSize(
+                Display.DISPLAY_WIDTH * SwingDisplayComponent.PIXEL_SIZE,
+                Display.DISPLAY_HEIGHT * SwingDisplayComponent.PIXEL_SIZE
+        );
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
         swingDisplayComponent = new SwingDisplayComponent(display);

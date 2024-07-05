@@ -6,7 +6,7 @@ public final class Sleep {
     private Sleep() {
     }
 
-    public static void fromFrequency(int hertz) {
+    public static void fromFrameRate(int hertz) {
         // Hz = 1 / s => s = 1 / Hz
         double millis = (1.0 / hertz) * 1000;
 
