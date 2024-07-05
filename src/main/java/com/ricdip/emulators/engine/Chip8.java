@@ -311,7 +311,9 @@ public class Chip8 extends BaseChip8 {
                 if (pressedKey.isEmpty()) {
                     break;
                 }
-                V[X] = pressedKey.get();
+                int key = pressedKey.get();
+                log.debug(String.format("pressed key: 0x%01X", key));
+                V[X] = key;
                 PC += 2;
                 break;
             }
@@ -409,11 +411,13 @@ public class Chip8 extends BaseChip8 {
     }
 
     private void updateTimers() {
+        log.debug("delay timer: {}", delayTimer);
         if (delayTimer > 0) {
             delayTimer -= 1;
         }
-
+        log.debug("sound timer: {}", soundTimer);
         if (soundTimer > 0) {
+            log.debug("performing sound");
             sound.performSound();
             soundTimer -= 1;
         }

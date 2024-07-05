@@ -21,7 +21,6 @@ public class SwingDisplayComponent extends JComponent {
                 } else {
                     g.setColor(Color.BLACK);
                 }
-
                 g.fillRect(width * PIXEL_SIZE, height * PIXEL_SIZE, PIXEL_SIZE, PIXEL_SIZE);
             }
         }
@@ -30,5 +29,13 @@ public class SwingDisplayComponent extends JComponent {
     public void redraw(Display display) {
         this.display = display;
         repaint();
+    }
+
+    @Override
+    public Dimension getPreferredSize() {
+        return new Dimension(
+                Display.DISPLAY_WIDTH * PIXEL_SIZE,
+                Display.DISPLAY_HEIGHT * PIXEL_SIZE
+        );
     }
 }

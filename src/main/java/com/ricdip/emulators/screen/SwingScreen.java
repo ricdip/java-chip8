@@ -17,16 +17,13 @@ public class SwingScreen implements Screen {
 
     public SwingScreen(Display display) {
         frame = new JFrame(WINDOW_TITLE);
-        frame.setSize(
-                Display.DISPLAY_WIDTH * SwingDisplayComponent.PIXEL_SIZE,
-                Display.DISPLAY_HEIGHT * SwingDisplayComponent.PIXEL_SIZE
-        );
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-
-        swingDisplayComponent = new SwingDisplayComponent(display);
-
-        frame.add(swingDisplayComponent);
+        frame.setResizable(false);
         frame.setVisible(true);
+        swingDisplayComponent = new SwingDisplayComponent(display);
+        frame.add(swingDisplayComponent);
+        frame.pack();
+        frame.setLocationRelativeTo(null);
     }
 
     @Override
@@ -40,18 +37,15 @@ public class SwingScreen implements Screen {
             @Override
             public void keyPressed(KeyEvent e) {
                 Optional<Integer> keyPressed = getChip8Key(e.getKeyChar());
-
                 keyPressed.ifPresent(keyboard::setKeyPressed);
             }
 
             @Override
             public void keyReleased(KeyEvent e) {
                 Optional<Integer> keyReleased = getChip8Key(e.getKeyChar());
-
                 keyReleased.ifPresent(keyboard::setKeyReleased);
             }
         });
-
         frame.setFocusable(true);
         frame.requestFocusInWindow();
     }
