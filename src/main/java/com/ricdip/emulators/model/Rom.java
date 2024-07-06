@@ -4,6 +4,7 @@ import com.ricdip.emulators.exception.RomException;
 import lombok.Getter;
 import lombok.NonNull;
 
+import java.io.FileInputStream;
 import java.io.InputStream;
 import java.nio.file.Path;
 import java.util.Objects;
@@ -21,7 +22,7 @@ public class Rom {
      * @throws RomException if ROM file is not found or an exception occurs when reading file
      */
     public Rom(@NonNull String romPath) {
-        try (InputStream romInputStream = this.getClass().getClassLoader().getResourceAsStream(romPath)) {
+        try (InputStream romInputStream = new FileInputStream(romPath)) {
             Objects.requireNonNull(romInputStream);
             romName = Path.of(romPath).getFileName().toString();
             romContent = romInputStream.readAllBytes();

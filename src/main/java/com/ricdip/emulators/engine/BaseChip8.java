@@ -143,7 +143,7 @@ public abstract class BaseChip8 {
         for (int i = 0; i < rom.getRomSize(); i++) {
             memory[i + PC_INIT_VALUE] = Byte.toUnsignedInt(romContent[i]);
         }
-        log.info("ROM file loaded");
+        log.info("ROM file '{}' loaded", rom.getRomName());
     }
 
     private void init() {

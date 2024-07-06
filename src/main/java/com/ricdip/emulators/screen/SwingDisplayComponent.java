@@ -2,11 +2,13 @@ package com.ricdip.emulators.screen;
 
 import com.ricdip.emulators.engine.Display;
 import lombok.AllArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 
 import javax.swing.*;
 import java.awt.*;
 
 @AllArgsConstructor
+@Slf4j
 public class SwingDisplayComponent extends JComponent {
     private Display display;
     public static final int PIXEL_SIZE = 10;
@@ -27,6 +29,7 @@ public class SwingDisplayComponent extends JComponent {
     }
 
     public void redraw(Display display) {
+        log.trace("redraw screen");
         this.display = display;
         repaint();
     }

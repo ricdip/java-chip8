@@ -13,7 +13,7 @@ import java.util.Optional;
 public class SwingScreen implements Screen {
     private final SwingDisplayComponent swingDisplayComponent;
     private final JFrame frame;
-    public static final String WINDOW_TITLE = "Chip-8";
+    public static final String WINDOW_TITLE = "CHIP-8";
 
     public SwingScreen(Display display) {
         frame = new JFrame(WINDOW_TITLE);

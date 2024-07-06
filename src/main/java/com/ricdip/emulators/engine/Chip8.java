@@ -19,7 +19,7 @@ public class Chip8 extends BaseChip8 {
 
     public void setRandomSeed(long seed) {
         random.setSeed(seed);
-        log.info("random seed {} set", seed);
+        log.info("random seed '{}' set", seed);
     }
 
     @Override
@@ -411,13 +411,13 @@ public class Chip8 extends BaseChip8 {
     }
 
     private void updateTimers() {
-        log.debug("delay timer: {}", delayTimer);
+        log.trace("delay timer: {}", delayTimer);
         if (delayTimer > 0) {
             delayTimer -= 1;
         }
-        log.debug("sound timer: {}", soundTimer);
+        log.trace("sound timer: {}", soundTimer);
         if (soundTimer > 0) {
-            log.debug("performing sound");
+            log.trace("performing sound");
             sound.performSound();
             soundTimer -= 1;
         }

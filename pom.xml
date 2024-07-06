@@ -16,6 +16,7 @@
         <!-- dependencies versions -->
         <lombok.version>1.18.32</lombok.version>
         <slf4j-api.version>2.0.13</slf4j-api.version>
+        <picocli.version>4.7.6</picocli.version>
         <!-- plugins versions -->
         <spring-boot-maven-plugin.version>3.3.0</spring-boot-maven-plugin.version>
     </properties>
@@ -37,6 +38,11 @@
             <artifactId>slf4j-simple</artifactId>
             <version>${slf4j-api.version}</version>
         </dependency>
+        <dependency>
+            <groupId>info.picocli</groupId>
+            <artifactId>picocli</artifactId>
+            <version>${picocli.version}</version>
+        </dependency>
     </dependencies>
 
     <build>
@@ -49,6 +55,7 @@
                     <execution>
                         <goals>
                             <goal>repackage</goal>
+                            <goal>build-info</goal>
                         </goals>
                         <configuration>
                             <mainClass>com.ricdip.emulators.Main</mainClass>
