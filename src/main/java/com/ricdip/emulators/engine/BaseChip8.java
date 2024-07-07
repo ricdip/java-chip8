@@ -80,17 +80,21 @@ public abstract class BaseChip8 {
 
     /**
      * object that contains a 16-key hexadecimal keypad with the following layout:
+     * <pre>
      * |1|2|3|C|
      * |4|5|6|D|
      * |7|8|9|E|
      * |A|0|B|F|
+     * </pre>
      */
     protected Keyboard keyboard;
 
     /**
      * the original implementation of the Chip-8 language used a 64x32-pixel monochrome display with this format:
-     * |(0,0)   (63,0)|
-     * |(0,31) (63,31)|
+     * <pre>
+     * |(0,0)   (0,63)|
+     * |(31,0) (31,63)|
+     * </pre>
      * Chip-8 draws graphics on screen through the use of sprites. A sprite is a group of bytes which are a binary
      * representation of the desired picture.
      * Chip-8 sprites may be up to 15 bytes, for a possible sprite size of 8x15.
@@ -174,11 +178,18 @@ public abstract class BaseChip8 {
     /**
      * emulate 1 CHIP-8 cycle: fetch opcode, decode opcode, execute opcode.
      * At the end, update sound timer and delay timer.
+     *
+     * @throws Chip8Exception if an error occurred during cycle emulation
      */
     public abstract void emulateCycle();
 
+    /**
+     * set CHIP-8 sound implementation
+     *
+     * @param sound the sound implementation to set
+     */
     public void setSound(@NonNull Sound sound) {
         this.sound = sound;
-        log.info("sound module '{}' set", sound.getClass().getName());
+        log.info("sound implementation '{}' set", sound.getClass().getName());
     }
 }

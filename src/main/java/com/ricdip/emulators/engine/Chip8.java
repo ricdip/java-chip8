@@ -17,6 +17,11 @@ public class Chip8 extends BaseChip8 {
         random = new Random();
     }
 
+    /**
+     * set random seed
+     *
+     * @param seed the random seed to set
+     */
     public void setRandomSeed(long seed) {
         random.setSeed(seed);
         log.info("random seed '{}' set", seed);

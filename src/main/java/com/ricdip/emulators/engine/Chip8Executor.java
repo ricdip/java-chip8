@@ -1,5 +1,7 @@
 package com.ricdip.emulators.engine;
 
+import com.ricdip.emulators.exception.Chip8Exception;
+import com.ricdip.emulators.exception.RomException;
 import com.ricdip.emulators.model.Rom;
 import com.ricdip.emulators.screen.Screen;
 import com.ricdip.emulators.screen.SwingScreen;
@@ -12,6 +14,14 @@ public final class Chip8Executor {
     private Chip8Executor() {
     }
 
+    /**
+     * start CHIP-8 emulation
+     *
+     * @param romPath    the path to the ROM file
+     * @param randomSeed nullable random seed to set
+     * @throws RomException   if an error occurs during ROM reading
+     * @throws Chip8Exception if an error occurs during emulation
+     */
     public static void startEmulation(String romPath, Long randomSeed) {
         // init engine
         Chip8 chip8 = new Chip8();

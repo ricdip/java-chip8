@@ -8,6 +8,12 @@ public final class Chip8OpcodeDecoder {
     private Chip8OpcodeDecoder() {
     }
 
+    /**
+     * decode CHIP-8 Instruction from opcode
+     *
+     * @param opcode the opcode to decode
+     * @return decoded instruction
+     */
     public static Instruction decode(int opcode) {
         int op = (opcode & 0xF000) >>> 12;
         int x = (opcode & 0x0F00) >>> 8;

@@ -15,7 +15,7 @@ import lombok.Getter;
  */
 public enum OpcodeType {
     /**
-     * SYS addr: Jump to a machine code routine at nnn.
+     * SYS addr: Jump to a machine code routine at NNN.
      */
     OP_0NNN("0NNN"),
 
@@ -30,87 +30,87 @@ public enum OpcodeType {
     OP_00EE("00EE"),
 
     /**
-     * JP addr: Jump to location nnn.
+     * JP addr: Jump to location NNN.
      */
     OP_1NNN("1NNN"),
 
     /**
-     * CALL addr: Call subroutine at nnn.
+     * CALL addr: Call subroutine at NNN.
      */
     OP_2NNN("2NNN"),
 
     /**
-     * SE Vx, byte: Skip next instruction if Vx = kk.
+     * SE VX, byte: Skip next instruction if VX = KK.
      */
     OP_3XKK("3XKK"),
 
     /**
-     * SNE Vx, byte: Skip next instruction if Vx != kk.
+     * SNE VX, byte: Skip next instruction if VX != KK.
      */
     OP_4XKK("4XKK"),
 
     /**
-     * SE Vx, Vy: Skip next instruction if Vx = Vy.
+     * SE VX, VY: Skip next instruction if VX = VY.
      */
     OP_5XY0("5XY0"),
 
     /**
-     * LD Vx, byte: Set Vx = kk.
+     * LD VX, byte: Set VX = KK.
      */
     OP_6XKK("6XKK"),
 
     /**
-     * ADD Vx, byte: Set Vx = Vx + kk.
+     * ADD VX, byte: Set VX = VX + KK.
      */
     OP_7XKK("7XKK"),
 
     /**
-     * LD Vx, Vy: Set Vx = Vy.
+     * LD VX, VY: Set VX = VY.
      */
     OP_8XY0("8XY0"),
 
     /**
-     * OR Vx, Vy: Set Vx = Vx OR Vy.
+     * OR Vx, Vy: Set VX = VX OR VY.
      */
     OP_8XY1("8XY1"),
 
     /**
-     * AND Vx, Vy: Set Vx = Vx AND Vy.
+     * AND VX, VY: Set VX = VX AND VY.
      */
     OP_8XY2("8XY2"),
 
     /**
-     * XOR Vx, Vy: Set Vx = Vx XOR Vy.
+     * XOR VX, VY: Set VX = VX XOR VY.
      */
     OP_8XY3("8XY3"),
 
     /**
-     * ADD Vx, Vy: Set Vx = Vx + Vy, set VF = carry.
+     * ADD VX, VY: Set VX = VX + VY, set VF = carry.
      */
     OP_8XY4("8XY4"),
 
     /**
-     * SUB Vx, Vy: Set Vx = Vx - Vy, set VF = NOT borrow.
+     * SUB VX, VY: Set VX = VX - VY, set VF = NOT borrow.
      */
     OP_8XY5("8XY5"),
 
     /**
-     * SHR Vx {, Vy}: Set Vx = Vy, then SHR 1.
+     * SHR(1) VX: Set VX = VX SHR 1.
      */
     OP_8XY6("8XY6"),
 
     /**
-     * SUBN Vx, Vy: Set Vx = Vy - Vx, set VF = NOT borrow.
+     * SUBN VX, VY: Set VX = VY - VX, set VF = NOT borrow.
      */
     OP_8XY7("8XY7"),
 
     /**
-     * SHL Vx {, Vy}: Set Vx = Vy, then SHL 1.
+     * SHL(1) VX: Set VX = VX SHL 1.
      */
     OP_8XYE("8XYE"),
 
     /**
-     * SNE Vx, Vy: Skip next instruction if Vx != Vy.
+     * SNE VX, VY: Skip next instruction if VX != VY.
      */
     OP_9XY0("9XY0"),
 
@@ -120,72 +120,72 @@ public enum OpcodeType {
     OP_ANNN("ANNN"),
 
     /**
-     * JP V0, addr: Jump to location nnn + V0.
+     * JP V0, addr: Jump to location NNN + V0.
      */
     OP_BNNN("BNNN"),
 
     /**
-     * RND Vx, byte: Set Vx = random byte AND kk.
+     * RND VX, byte: Set VX = random byte AND KK.
      */
     OP_CXKK("CXKK"),
 
     /**
-     * DRW Vx, Vy, nibble: Display n-byte sprite starting at memory location I at (Vx, Vy), set VF = collision.
+     * DRW VX, VY, nibble: Display n-byte sprite starting at memory location I at (VX, VY), set VF = collision.
      */
     OP_DXYN("DXYN"),
 
     /**
-     * SKP Vx: Skip next instruction if key with the value of Vx is pressed.
+     * SKP VX: Skip next instruction if key with the value of VX is pressed.
      */
     OP_EX9E("EX9E"),
 
     /**
-     * SKNP Vx: Skip next instruction if key with the value of Vx is not pressed.
+     * SKNP VX: Skip next instruction if key with the value of VX is not pressed.
      */
     OP_EXA1("EXA1"),
 
     /**
-     * LD Vx, DT: Set Vx = delay timer value.
+     * LD VX, DT: Set VX = delay timer value.
      */
     OP_FX07("FX07"),
 
     /**
-     * LD Vx, K: Wait for a key press, store the value of the key in Vx.
+     * LD VX, K: Wait for a key press, store the value of the key in VX.
      */
     OP_FX0A("FX0A"),
 
     /**
-     * LD DT, Vx: Set delay timer = Vx.
+     * LD DT, VX: Set delay timer = VX.
      */
     OP_FX15("FX15"),
 
     /**
-     * LD ST, Vx: Set sound timer = Vx.
+     * LD ST, VX: Set sound timer = VX.
      */
     OP_FX18("FX18"),
 
     /**
-     * ADD I, Vx: Set I = I + Vx.
+     * ADD I, VX: Set I = I + VX.
      */
     OP_FX1E("FX1E"),
 
     /**
-     * LD F, Vx: Set I = location of sprite for digit Vx.
+     * LD F, VX: Set I = location of sprite for digit VX.
      */
     OP_FX29("FX29"),
 
     /**
-     * LD B, Vx: Store BCD representation of Vx in memory locations I, I+1, and I+2.
+     * LD B, VX: Store BCD representation of VX in memory locations I, I+1, and I+2.
      */
     OP_FX33("FX33"),
 
     /**
-     * LD [I], Vx: Store registers V0 through Vx in memory starting at location I.
+     * LD [I], VX: Store registers V0 through VX in memory starting at location I.
      */
     OP_FX55("FX55"),
 
     /**
-     * LD Vx, [I]: Read registers V0 through Vx from memory starting at location I.
+     * LD VX, [I]: Read registers V0 through VX from memory starting at location I.
      */
     OP_FX65("FX65");
 

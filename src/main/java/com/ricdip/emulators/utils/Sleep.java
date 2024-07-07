@@ -6,6 +6,11 @@ public final class Sleep {
     private Sleep() {
     }
 
+    /**
+     * sleep the necessary time to limit frame rate to provided <code>hertz</code>
+     *
+     * @param hertz limit frame rate value
+     */
     public static void fromFrameRate(int hertz) {
         // Hz = 1 / s => s = 1 / Hz
         double millis = (1.0 / hertz) * 1000;

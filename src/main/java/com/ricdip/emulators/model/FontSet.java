@@ -1,5 +1,8 @@
 package com.ricdip.emulators.model;
 
+/**
+ * CHIP-8 fontset definition
+ */
 public class FontSet {
     public static final int[] SPRITES = new int[]{
             0xF0, 0x90, 0x90, 0x90, 0xF0, // 0

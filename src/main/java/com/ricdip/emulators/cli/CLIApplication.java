@@ -21,13 +21,12 @@ public class CLIApplication implements Runnable {
     private Long randomSeed;
 
     @ArgGroup
-    private LoggingArgGroup loggingArgGroup;
+    private LoggingArgGroup loggingArgGroup = new LoggingArgGroup();
 
     private ICLIRunner runner;
 
     public CLIApplication(ICLIRunner runner) {
         this.runner = runner;
-        this.loggingArgGroup = new LoggingArgGroup();
     }
 
     @Override
