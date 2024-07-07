@@ -41,6 +41,7 @@ public final class Chip8Executor {
 
         // emulation loop
         log.info("emulation loop start");
+        // TODO: catch exceptions and gracefully exit emulation
         boolean running = true;
         while (running) {
             // emulate 1 cycle
