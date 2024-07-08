@@ -21,9 +21,9 @@ public class CLIApplication implements Runnable {
     private Long randomSeed;
 
     @ArgGroup
-    private LoggingArgGroup loggingArgGroup = new LoggingArgGroup();
+    private final LoggingArgGroup loggingArgGroup = new LoggingArgGroup();
 
-    private ICLIRunner runner;
+    private final ICLIRunner runner;
 
     public CLIApplication(ICLIRunner runner) {
         this.runner = runner;

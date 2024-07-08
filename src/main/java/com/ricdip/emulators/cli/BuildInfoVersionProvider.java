@@ -10,6 +10,12 @@ public class BuildInfoVersionProvider implements IVersionProvider {
     private static final String BUILD_INFO_RESOURCE_PATH = "META-INF/build-info.properties";
     private static final String BUILD_INFO_VERSION_PROPERTY = "build.version";
 
+    /**
+     * get SemVer string from 'META-INF/build-info.properties'
+     *
+     * @return SemVer string that describes the application version
+     * @throws Exception if an error occurs
+     */
     @Override
     public String[] getVersion() throws Exception {
         URL url = getClass().getClassLoader().getResource(BUILD_INFO_RESOURCE_PATH);
