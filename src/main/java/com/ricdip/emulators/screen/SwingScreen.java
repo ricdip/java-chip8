@@ -7,6 +7,8 @@ import lombok.Getter;
 import javax.swing.*;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
+import java.awt.event.KeyListener;
+import java.awt.event.WindowEvent;
 import java.util.Optional;
 
 @Getter
@@ -17,13 +19,14 @@ public class SwingScreen implements Screen {
 
     public SwingScreen(Display display) {
         frame = new JFrame(WINDOW_TITLE);
-        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         frame.setResizable(false);
         frame.setVisible(true);
         swingDisplayComponent = new SwingDisplayComponent(display);
         frame.add(swingDisplayComponent);
         frame.pack();
         frame.setLocationRelativeTo(null);
+        configureOnWindowClosedListener();
     }
 
     @Override
@@ -32,7 +35,12 @@ public class SwingScreen implements Screen {
     }
 
     @Override
-    public void configureKeyListener(Keyboard keyboard) {
+    public boolean isClosed() {
+        return !frame.isDisplayable();
+    }
+
+    @Override
+    public void attachKeyboard(Keyboard keyboard) {
         frame.addKeyListener(new KeyAdapter() {
             @Override
             public void keyPressed(KeyEvent e) {
@@ -70,5 +78,16 @@ public class SwingScreen implements Screen {
             case 'v' -> Optional.of(0xF);
             default -> Optional.empty();
         };
+    }
+
+    private void configureOnWindowClosedListener() {
+        frame.addWindowListener(new java.awt.event.WindowAdapter() {
+            @Override
+            public void windowClosed(WindowEvent e) {
+                for (KeyListener keyListener : frame.getKeyListeners()) {
+                    frame.removeKeyListener(keyListener);
+                }
+            }
+        });
     }
 }

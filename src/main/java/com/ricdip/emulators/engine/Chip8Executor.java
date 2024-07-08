@@ -28,7 +28,7 @@ public final class Chip8Executor {
         // init graphics
         Screen screen = new SwingScreen(chip8.getDisplay());
         // init keyboard input
-        screen.configureKeyListener(chip8.getKeyboard());
+        screen.attachKeyboard(chip8.getKeyboard());
         // TODO: init real sound effect
         chip8.setSound(new PrintSound());
         // init random seed
@@ -38,24 +38,24 @@ public final class Chip8Executor {
         // load ROM file
         Rom romFile = new Rom(romPath);
         chip8.loadRom(romFile);
-
         // emulation loop
         log.info("emulation loop start");
-        // TODO: catch exceptions and gracefully exit emulation
         boolean running = true;
         while (running) {
+            if (screen.isClosed()) {
+                running = false;
+            }
             // emulate 1 cycle
             chip8.emulateCycle();
-
             // if draw flag is set, redraw screen
             if (chip8.isDrawFlag()) {
                 chip8.setDrawFlag(false);
                 screen.redraw(chip8.getDisplay());
             }
-
             // limit frame rate at 60 Hz
             Sleep.fromFrameRate(Chip8.FRAME_RATE);
         }
         log.info("emulation loop end");
+        log.info("emulation exit");
     }
 }
