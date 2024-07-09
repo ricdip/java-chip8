@@ -1,7 +1,7 @@
 .DEFAULT_GOAL := help
 
 .SILENT: help
-.PHONY: help # show this help message
+.PHONY: help # show help message
 help:
 	@grep -E '^.PHONY:.+#.+' Makefile | sed 's/.PHONY: //' | awk -F ' # ' '{printf "%-15s %s\n", $$1, $$2}'
 
