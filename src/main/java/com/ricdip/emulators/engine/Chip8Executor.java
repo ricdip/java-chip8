@@ -5,13 +5,15 @@ import com.ricdip.emulators.exception.RomException;
 import com.ricdip.emulators.model.Rom;
 import com.ricdip.emulators.screen.Screen;
 import com.ricdip.emulators.screen.SwingScreen;
-import com.ricdip.emulators.sound.PrintSound;
+import com.ricdip.emulators.sound.ClipSound;
+import com.ricdip.emulators.sound.Sound;
 import com.ricdip.emulators.utils.Sleep;
 import lombok.extern.slf4j.Slf4j;
 
 @Slf4j
 public final class Chip8Executor {
     private Chip8Executor() {
+        // NOOP
     }
 
     /**
@@ -29,8 +31,9 @@ public final class Chip8Executor {
         Screen screen = new SwingScreen(chip8.getDisplay());
         // init keyboard input
         screen.attachKeyboard(chip8.getKeyboard());
-        // TODO: init real sound effect
-        chip8.setSound(new PrintSound());
+        // init sound effect
+        Sound sound = new ClipSound();
+        chip8.setSound(sound);
         // init random seed
         if (randomSeed != null) {
             chip8.setRandomSeed(randomSeed);
@@ -56,6 +59,7 @@ public final class Chip8Executor {
             Sleep.fromFrameRate(Chip8.FRAME_RATE);
         }
         log.info("emulation loop end");
-        log.info("emulation exit");
+        sound.close();
+        log.info("exit emulation");
     }
 }

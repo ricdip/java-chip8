@@ -6,6 +6,7 @@ import com.ricdip.emulators.model.OpcodeType;
 
 public final class Chip8OpcodeDecoder {
     private Chip8OpcodeDecoder() {
+        // NOOP
     }
 
     /**

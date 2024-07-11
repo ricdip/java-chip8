@@ -3,6 +3,7 @@ package com.ricdip.emulators.engine;
 public final class Chip8OpcodeFetcher {
 
     private Chip8OpcodeFetcher() {
+        // NOOP
     }
 
     /**

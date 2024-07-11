@@ -3,6 +3,7 @@ package com.ricdip.emulators.screen;
 import com.ricdip.emulators.engine.Display;
 import com.ricdip.emulators.engine.Keyboard;
 import lombok.Getter;
+import lombok.extern.slf4j.Slf4j;
 
 import javax.swing.*;
 import java.awt.event.KeyAdapter;
@@ -12,6 +13,7 @@ import java.awt.event.WindowEvent;
 import java.util.Optional;
 
 @Getter
+@Slf4j
 public class SwingScreen implements Screen {
     private final SwingDisplayComponent swingDisplayComponent;
     private final JFrame frame;
@@ -27,6 +29,7 @@ public class SwingScreen implements Screen {
         frame.pack();
         frame.setLocationRelativeTo(null);
         configureOnWindowClosedListener();
+        log.info("screen initialized");
     }
 
     @Override
@@ -56,6 +59,7 @@ public class SwingScreen implements Screen {
         });
         frame.setFocusable(true);
         frame.requestFocusInWindow();
+        log.info("keyboard attached");
     }
 
     private Optional<Integer> getChip8Key(char key) {

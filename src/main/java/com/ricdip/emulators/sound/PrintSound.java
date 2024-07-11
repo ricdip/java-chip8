@@ -8,4 +8,9 @@ public class PrintSound implements Sound {
     public void performSound() {
         log.info("BEEP");
     }
+
+    @Override
+    public void close() {
+        // NOOP
+    }
 }
