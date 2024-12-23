@@ -21,4 +21,4 @@ package:
 	@echo "Building application JAR file..."
 	mvn package
 	mkdir -p bin
-	cp target/java-chip8-*.jar bin
+	cp target/JavaChip8-*.jar bin

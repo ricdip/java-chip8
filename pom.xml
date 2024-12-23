@@ -4,9 +4,9 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
 
-    <groupId>com.ricdip.emulators</groupId>
-    <artifactId>java-chip8</artifactId>
-    <version>1.0-SNAPSHOT</version>
+    <groupId>com.ricdip.emulators.javachip8</groupId>
+    <artifactId>JavaChip8</artifactId>
+    <version>1.0.1</version>
     <packaging>jar</packaging>
 
     <properties>
@@ -58,7 +58,7 @@
                             <goal>build-info</goal>
                         </goals>
                         <configuration>
-                            <mainClass>com.ricdip.emulators.Main</mainClass>
+                            <mainClass>com.ricdip.emulators.javachip8.Main</mainClass>
                             <excludes>
                                 <exclude>
                                     <groupId>org.projectlombok</groupId>

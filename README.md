@@ -59,7 +59,7 @@ user@host:~$ mvn package
 
 ## Run JAR file
 ```bash
-user@host:~$ java -jar java-chip8-1.0-SNAPSHOT.jar -r roms/octojam9title.ch8
+user@host:~$ java -jar JavaChip8-1.0.1.jar -r roms/octojam9title.ch8
 ```
 
 ## References
