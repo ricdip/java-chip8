@@ -11,15 +11,15 @@ import java.util.Optional;
         name = "<jar file name>",
         versionProvider = BuildInfoVersionProvider.class,
         mixinStandardHelpOptions = true,
-        description = "A simple CHIP-8 implementation written in Java"
+        description = "A simple CHIP-8 implementation written in Java."
 )
 public class CLIApplication implements Runnable {
     @ArgGroup
     private final LoggingArgGroup loggingArgGroup = new LoggingArgGroup();
     private final ICLIRunner runner;
-    @Option(names = {"-r", "--rom"}, description = "Path to CHIP-8 ROM file", required = true)
+    @Option(names = {"-r", "--rom"}, description = "Path to CHIP-8 ROM file.", required = true)
     private String romPath;
-    @Option(names = {"-s", "--seed"}, description = "Set random seed")
+    @Option(names = {"-s", "--seed"}, description = "Set random seed.")
     private Long randomSeed;
 
     public CLIApplication(ICLIRunner runner) {

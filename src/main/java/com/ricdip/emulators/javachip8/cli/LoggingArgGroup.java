@@ -5,16 +5,16 @@ import picocli.CommandLine.Option;
 import java.util.Optional;
 
 public class LoggingArgGroup {
-    @Option(names = {"-lo", "--log-off"}, description = "Disable logging")
+    @Option(names = {"-lo", "--log-off"}, description = "Disable logging.")
     private boolean loggingOff;
 
-    @Option(names = {"-li", "--log-info"}, description = "Enable logging level INFO [default]")
+    @Option(names = {"-li", "--log-info"}, description = "Enable logging level INFO [default].")
     private boolean loggingInfo;
 
-    @Option(names = {"-ld", "--log-debug"}, description = "Enable logging level DEBUG")
+    @Option(names = {"-ld", "--log-debug"}, description = "Enable logging level DEBUG.")
     private boolean loggingDebug;
 
-    @Option(names = {"-lt", "--log-trace"}, description = "Enable logging level TRACE")
+    @Option(names = {"-lt", "--log-trace"}, description = "Enable logging level TRACE.")
     private boolean loggingTrace;
 
     public Optional<LoggingLevel> getLoggingLevel() {

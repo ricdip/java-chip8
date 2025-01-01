@@ -31,14 +31,14 @@ A simple CHIP-8 implementation written in Java.
 ```
 Usage: <jar file name> [-hV] -r=<romPath> [-s=<randomSeed>] [-lo | -li | -ld |
                        -lt]
-A simple CHIP-8 implementation written in Java
+A simple CHIP-8 implementation written in Java.
   -h, --help                Show this help message and exit.
-      -ld, --log-debug      Enable logging level DEBUG
-      -li, --log-info       Enable logging level INFO [default]
-      -lo, --log-off        Disable logging
-      -lt, --log-trace      Enable logging level TRACE
-  -r, --rom=<romPath>       Path to CHIP-8 ROM file
-  -s, --seed=<randomSeed>   Set random seed
+      -ld, --log-debug      Enable logging level DEBUG.
+      -li, --log-info       Enable logging level INFO [default].
+      -lo, --log-off        Disable logging.
+      -lt, --log-trace      Enable logging level TRACE.
+  -r, --rom=<romPath>       Path to CHIP-8 ROM file.
+  -s, --seed=<randomSeed>   Set random seed.
   -V, --version             Print version information and exit.
 ```
 
